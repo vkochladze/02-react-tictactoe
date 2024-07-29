@@ -3,10 +3,11 @@ import './Players.css'
 
 interface PlayerInfo {
     initialName: string,
-    playerSymbol: string;
+    playerSymbol: string,
+    isActive: boolean;
 }
 
-export default function Players({ initialName, playerSymbol }: PlayerInfo) {
+export default function Players({ initialName, playerSymbol, isActive }: PlayerInfo) {
 
     const [isEditing, setisEditing] = useState(false);
     const [playerName, setplayerName] = useState(initialName);
@@ -28,7 +29,7 @@ export default function Players({ initialName, playerSymbol }: PlayerInfo) {
     return (
         <>
             <ol id="players">
-                <li>
+                <li className={isActive? 'active' : undefined}>
                     <span className='player'>
                         {editableplayerName}
                         <span className="player-symbol">{playerSymbol}</span>

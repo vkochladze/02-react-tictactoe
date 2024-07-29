@@ -16,11 +16,11 @@ function App() {
     <>
       <main>
         <div id="game-container">
-          <ol id="players">
-            <Players initialName="Vano" playerSymbol="X" />
-            <Players initialName="Bobbie" playerSymbol="O" />
+          <ol id="players" className="highlight-player">
+            <Players initialName="Vano" playerSymbol="X" isActive={currentPlayer === 'X'} />
+            <Players initialName="Bobbie" playerSymbol="O" isActive={currentPlayer === 'O'} />
           </ol>
-          <GameBoard onSelectSquare={currentPlayer} />
+          <GameBoard onSelectSquare={handleSelectSquare} activePlayerSymbol={currentPlayer} />
         </div>
       </main>
     </>

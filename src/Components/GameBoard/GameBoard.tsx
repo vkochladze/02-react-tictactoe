@@ -8,10 +8,11 @@ const initialGamboard = [
 ]
 
 interface GameBoardInfo {
-    onSelectSquare: string;
+    onSelectSquare: () => void,
+    activePlayerSymbol: string;
 }
 
-export default function GameBoard({ onSelectSquare }: GameBoardInfo) {
+export default function GameBoard({ onSelectSquare, activePlayerSymbol }: GameBoardInfo) {
 
     const [gameBoard, setGameBoard] = useState(initialGamboard);
     const [currentPlayer, setCurrentPlayer] = useState('X')
@@ -19,13 +20,7 @@ export default function GameBoard({ onSelectSquare }: GameBoardInfo) {
     function handleSelectSquare(rowIndex: number, colIndex: number) {
         setGameBoard((prevGameBoard) => {
             const updatedBoard = [...prevGameBoard.map(innerArray => [...innerArray])]
-
-            currentPlayer === 'X'
-                ?
-                (updatedBoard[rowIndex][colIndex] = 'X', setCurrentPlayer('O'))
-                :
-                (updatedBoard[rowIndex][colIndex] = 'O', setCurrentPlayer('X'));
-
+            updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
             return updatedBoard;
         })
 
