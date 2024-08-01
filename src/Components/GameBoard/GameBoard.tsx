@@ -1,4 +1,4 @@
-import { useState, useSyncExternalStore } from 'react'
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import './GameBoard.css'
 
 const initialGamboard = [
@@ -8,34 +8,31 @@ const initialGamboard = [
 ]
 
 interface GameBoardInfo {
-    onSelectSquare: () => void,
-    activePlayerSymbol: string;
+    onSelectSquare: (rowIndex: number, colIndex: number) => void,
+    // @ts-ignore
+    turns: Array<T>
 }
 
-export default function GameBoard({ onSelectSquare, activePlayerSymbol }: GameBoardInfo) {
+export default function GameBoard({ onSelectSquare, turns }: GameBoardInfo) {
 
-    const [gameBoard, setGameBoard] = useState(initialGamboard);
-    const [currentPlayer, setCurrentPlayer] = useState('X')
+    // @ts-ignore
+    const gameBoard: Array<T> = initialGamboard;
 
-    function handleSelectSquare(rowIndex: number, colIndex: number) {
-        setGameBoard((prevGameBoard) => {
-            const updatedBoard = [...prevGameBoard.map(innerArray => [...innerArray])]
-            updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
-            return updatedBoard;
-        })
+    for (const turn of turns) {
+        const { square, player } = turn;
+        const { row, col } = square;
 
-        onSelectSquare();
+        gameBoard[row][col] = player;
     }
-
 
     return (
         <ol id='game-board'>
-            {gameBoard.map((row, rowIndex) =>
+            {gameBoard.map((row: string[], rowIndex: number) =>
                 <li key={rowIndex}>
                     <ol>
-                        {row.map((playerSymbol, colIndex) =>
+                        {row.map((playerSymbol: string, colIndex: number) =>
                             <li key={colIndex}>
-                                <button onClick={() => handleSelectSquare(rowIndex, colIndex)}>{playerSymbol}</button>
+                                <button onClick={() => onSelectSquare(rowIndex, colIndex)}>{playerSymbol}</button>
                             </li>)}
                     </ol>
                 </li>)}
