@@ -1,4 +1,9 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import './Log.css'
+
 interface LogInfo {
+    // @ts-ignore
+
     turns: Array<T>
 }
 

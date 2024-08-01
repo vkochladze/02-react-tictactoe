@@ -29,7 +29,7 @@ export default function Players({ initialName, playerSymbol, isActive }: PlayerI
     return (
         <>
             <ol id="players">
-                <li className={isActive? 'active' : undefined}>
+                <li className={isActive ? 'active' : undefined}>
                     <span className='player'>
                         {editableplayerName}
                         <span className="player-symbol">{playerSymbol}</span>
